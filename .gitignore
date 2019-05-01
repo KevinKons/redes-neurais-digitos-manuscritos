@@ -1,0 +1,87 @@
+
+# Created by https://www.gitignore.io/api/intellij
+# Edit at https://www.gitignore.io/?templates=intellij
+
+### Intellij ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific stuff
+DigitosManuscritos/.idea/**/workspace.xml
+DigitosManuscritos/.idea/**/tasks.xml
+DigitosManuscritos/.idea/**/usage.statistics.xml
+DigitosManuscritos/.idea/**/dictionaries
+DigitosManuscritos/.idea/**/shelf
+
+# Generated files
+DigitosManuscritos/.idea/**/contentModel.xml
+
+# Sensitive or high-churn files
+DigitosManuscritos/.idea/**/dataSources/
+DigitosManuscritos/.idea/**/dataSources.ids
+DigitosManuscritos/.idea/**/dataSources.local.xml
+DigitosManuscritos/.idea/**/sqlDataSources.xml
+DigitosManuscritos/.idea/**/dynamic.xml
+DigitosManuscritos/.idea/**/uiDesigner.xml
+DigitosManuscritos/.idea/**/dbnavigator.xml
+
+# Gradle
+DigitosManuscritos/.idea/**/gradle.xml
+DigitosManuscritos/.idea/**/libraries
+
+# Gradle and Maven with auto-import
+# When using Gradle or Maven with auto-import, you should exclude module files,
+# since they will be recreated, and may cause churn.  Uncomment if using
+# auto-import.
+# DigitosManuscritos/.idea/modules.xml
+# DigitosManuscritos/.idea/*.iml
+# DigitosManuscritos/.idea/modules
+
+# CMake
+DigitosManuscritos/cmake-build-*/
+
+# Mongo Explorer plugin
+DigitosManuscritos/.idea/**/mongoSettings.xml
+
+# File-based project format
+*.iws
+
+# IntelliJ
+DigitosManuscritos/out/
+
+# mpeltonen/sbt-idea plugin
+DigitosManuscritos/.idea_modules/
+
+# JIRA plugin
+atlassian-ide-plugin.xml
+
+# Cursive Clojure plugin
+DigitosManuscritos/.idea/replstate.xml
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties
+
+# Editor-based Rest Client
+DigitosManuscritos/.idea/httpRequests
+
+# Android studio 3.1+ serialized cache file
+DigitosManuscritos/.idea/caches/build_file_checksums.ser
+
+# JetBrains templates
+**___jb_tmp___
+
+### Intellij Patch ###
+# Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
+
+# *.iml
+# modules.xml
+# .idea/misc.xml
+# *.ipr
+
+# Sonarlint plugin
+DigitosManuscritos/.idea/sonarlint
+
+# End of https://www.gitignore.io/api/intellij

@@ -9,6 +9,5 @@ public class Main {
         System.out.println("oi");
 
         BasicNetwork network = new BasicNetwork();
-        network.addLayer(new BasicLayer(new ActivationLOG(), true, ));
     }
 }
