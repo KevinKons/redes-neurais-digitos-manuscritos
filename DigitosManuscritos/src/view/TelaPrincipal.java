@@ -77,13 +77,21 @@ public class TelaPrincipal extends JFrame {
         iniciaMatriz();
         setaTamanhoColunas();
 
-        jbLimpar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controller.criarMatriz();
-                iniciaMatriz();
-                setaTamanhoColunas();
+        jbIdentificarNumero.addActionListener(e -> {
+            String representacao = "";
+            boolean[][] matriz = controller.getMatriz();
+            for(boolean[] linha : matriz) {
+                for (boolean celula : linha)
+                    representacao = representacao + celula + " ";
+                representacao += "\n";
             }
+            JOptionPane.showMessageDialog(null, representacao);
+        });
+
+        jbLimpar.addActionListener(e -> {
+            controller.criarMatriz();
+            iniciaMatriz();
+            setaTamanhoColunas();
         });
 
         jtbMatriz.addMouseListener(new MouseListener() {
