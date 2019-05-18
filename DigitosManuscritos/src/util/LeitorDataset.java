@@ -6,8 +6,18 @@ import java.io.IOException;
 
 public class LeitorDataset {
 
-    public void lerDataset(double[][] entradas, double[][] saidas, String nomeArquivo) {
+    private static LeitorDataset instance;
 
+    public static LeitorDataset getInstance() {
+        if(instance == null)
+            instance = new LeitorDataset();
+
+        return instance;
+    }
+
+    private LeitorDataset() {}
+
+    public void lerDataset(double[][] entradas, double[][] saidas, String nomeArquivo) {
         try {
             BufferedReader ler = new BufferedReader(new FileReader("../dataset-digitos-manuscritos/" + nomeArquivo));
             String str;
@@ -28,11 +38,9 @@ public class LeitorDataset {
         for (int i = 0; i < 256; i++) {
             entradas[countLinha][i] = Integer.parseInt(linha[i].replace(".","-").split("-")[0]);
         }
-        for (int i = 256; i < 266; i++) {
-            if (Integer.parseInt(linha[i]) != 0) {
-                saidas[countLinha][0] = i - 256;
-                break;
-            }
+
+        for (int i = 0; i < 10; i++) {
+            saidas[countLinha][i] = Double.parseDouble(linha[i + 256]);
         }
     }
 

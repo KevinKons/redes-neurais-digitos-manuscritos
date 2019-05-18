@@ -1,3 +1,13 @@
+import org.encog.Encog;
+import org.encog.engine.network.activation.ActivationTANH;
+import org.encog.ml.data.MLData;
+import org.encog.ml.data.MLDataSet;
+import org.encog.ml.data.basic.BasicMLData;
+import org.encog.ml.data.basic.BasicMLDataSet;
+import org.encog.neural.networks.BasicNetwork;
+import org.encog.neural.networks.layers.BasicLayer;
+import org.encog.neural.networks.training.propagation.back.Backpropagation;
+
 
 /**
  * Exemplo de RN para resolver o XOR.
@@ -30,6 +40,7 @@ public class ExemploXOR {
     /**
      * No m�todo main ser� criada e treinada a RN.
      */
+    @SuppressWarnings("Duplicates")
     public static void main(final String args[]) {
 
         // Cria��o da RN Multilayer Perceptron (� do tipo BasicNetwork)

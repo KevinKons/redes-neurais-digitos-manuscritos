@@ -1,6 +1,7 @@
 package rns;
 
 import org.encog.Encog;
+import org.encog.engine.network.activation.ActivationSigmoid;
 import org.encog.engine.network.activation.ActivationTANH;
 import org.encog.ml.data.MLData;
 import org.encog.ml.data.MLDataSet;
@@ -12,14 +13,20 @@ import org.encog.neural.networks.training.propagation.back.Backpropagation;
 
 public class RedeNeural {
 
+    @SuppressWarnings("Duplicates")
     public void aprender(double entrada[][], double saida[][]) {
 
         BasicNetwork network = new BasicNetwork();
-        network.addLayer(new BasicLayer(null, true, 2));
-        network.addLayer(new BasicLayer(new ActivationTANH(), true, 3));
-        network.addLayer(new BasicLayer(new ActivationTANH(), false, 1));
+
+        network.addLayer(new BasicLayer(null, true, 256));
+        network.addLayer(new BasicLayer(new ActivationSigmoid(), true, 50));
+        network.addLayer(new BasicLayer(new ActivationSigmoid(), true, 50));
+        network.addLayer(new BasicLayer(new ActivationSigmoid(), true, 25));
+        network.addLayer(new BasicLayer(new ActivationSigmoid(), false, 10));
+
         network.getStructure().finalizeStructure();
         network.reset();
+
         MLDataSet dadosTreinamento = new BasicMLDataSet(entrada, saida);
         final Backpropagation treinamento = new Backpropagation(network, dadosTreinamento);
         System.out.println("Treinando a RN...");
