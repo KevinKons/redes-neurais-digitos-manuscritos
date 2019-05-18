@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class LeitorDataset {
 
-    public void lerDataset(int[][] entradas, int[][] saidas, String nomeArquivo) {
+    public void lerDataset(double[][] entradas, double[][] saidas, String nomeArquivo) {
 
         try {
             BufferedReader ler = new BufferedReader(new FileReader("../dataset-digitos-manuscritos/" + nomeArquivo));
@@ -23,7 +23,7 @@ public class LeitorDataset {
         }
     }
 
-    private void adicionarDadosLinha(int[][] entradas, int[][] saidas, String[] linha, int countLinha) {
+    private void adicionarDadosLinha(double[][] entradas, double[][] saidas, String[] linha, int countLinha) {
 
         for (int i = 0; i < 256; i++) {
             entradas[countLinha][i] = Integer.parseInt(linha[i].replace(".","-").split("-")[0]);
