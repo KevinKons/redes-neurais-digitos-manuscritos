@@ -13,6 +13,6 @@ public class Main {
         leitorDataset.lerDataset(entradas, saidas,"semeion.data");
 
         RedeNeural rn = new RedeNeural();
-        rn.aprender(entradas, saidas);
+        rn.aprender(entradas, saidas,1);
     }
 }

@@ -2,6 +2,7 @@ package util;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class LeitorDataset {
@@ -41,6 +42,24 @@ public class LeitorDataset {
 
         for (int i = 0; i < 10; i++) {
             saidas[countLinha][i] = Double.parseDouble(linha[i + 256]);
+        }
+    }
+
+    public void escreverSaida(String epocasError, String entradasSaidas, int numeroModelo){
+        try {
+            FileWriter writer = new FileWriter("output.txt", true);
+            writer.write("Modelo: "+ numeroModelo);
+            writer.write("\n\n");
+            writer.write("\n\n");
+            writer.write(epocasError);
+            writer.write("\n\n");
+            writer.write(entradasSaidas);
+            writer.write("\n\n");
+            writer.write("--------------------------------------------------------------------------------------------------------------------------------------------------");
+            writer.write("\n\n");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
