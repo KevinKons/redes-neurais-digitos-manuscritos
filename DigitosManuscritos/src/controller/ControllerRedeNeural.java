@@ -87,6 +87,7 @@ public class ControllerRedeNeural {
         for(int i = 0; i < RedeNeural.qntClasses; i++)
             somaPrecisoes += precisao[i];
         return somaPrecisoes / RedeNeural.qntClasses;
+
     }
 
     @SuppressWarnings("Duplicates")
@@ -151,8 +152,6 @@ public class ControllerRedeNeural {
             matrizConfusao[vetorSaidaPrevista[i]][vetorSaidaReal[i]]++;
         return matrizConfusao;
     }
-
-
 
     private int retornaSaida(double[] saida) {
         int numeroAtual = 0;
