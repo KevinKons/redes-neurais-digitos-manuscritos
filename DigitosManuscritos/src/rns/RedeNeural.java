@@ -9,7 +9,7 @@ import org.encog.ml.data.basic.BasicMLDataSet;
 import org.encog.neural.networks.BasicNetwork;
 import org.encog.neural.networks.layers.BasicLayer;
 import org.encog.neural.networks.training.propagation.back.Backpropagation;
-import util.LeitorDataset;
+import util.OperadorArquivo;
 
 public class RedeNeural {
 
@@ -60,7 +60,7 @@ public class RedeNeural {
             entradaSaida = "Entrada caso" + i + ": " + caso1Entrada + " --> Saída: " + saidaCaso1 + "\n";
         }
         Encog.getInstance().shutdown();
-        LeitorDataset.getInstance().escreverSaida(epocaError, entradaSaida, numeroModelo);
+        OperadorArquivo.getInstance().escreverSaida(epocaError, entradaSaida, numeroModelo);
         return saidaDaRede;
     }
 

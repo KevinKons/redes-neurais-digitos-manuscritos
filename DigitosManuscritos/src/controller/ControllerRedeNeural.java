@@ -1,7 +1,7 @@
 package controller;
 
 import rns.RedeNeural;
-import util.LeitorDataset;
+import util.OperadorArquivo;
 import util.OperacaoComMatriz;
 
 public class ControllerRedeNeural {
@@ -13,8 +13,8 @@ public class ControllerRedeNeural {
         double[][] entradas = new double[RedeNeural.qntExemplos][RedeNeural.qntPixels];
         double[][] saidas  = new double[RedeNeural.qntExemplos][10];
 
-        LeitorDataset leitorDataset = LeitorDataset.getInstance();
-        leitorDataset.lerDataset(entradas, saidas,"semeion.data");
+        OperadorArquivo operadorArquivo = OperadorArquivo.getInstance();
+        operadorArquivo.lerDataset(entradas, saidas,"semeion.data");
 
         tamanhoFold = RedeNeural.qntExemplos / folds;
         for(int i = 0; i < folds; i++)
@@ -55,7 +55,6 @@ public class ControllerRedeNeural {
             vetorSaidaReal[i] = retornaSaida(saidasParaTeste [i]);
         }
 
-        LeitorDataset.getInstance().escreverSaidas(vetorSaidaReal, vetorSaidaPrevista);
 
         int[][] matrizConfusao = geraMatrizConfusao(vetorSaidaReal, vetorSaidaPrevista);
         double acuracia = calculaAcuracia(matrizConfusao);
@@ -78,7 +77,10 @@ public class ControllerRedeNeural {
         }
 
         System.out.println("\n" + "F1-Score");
-        System.out.println(2 * ((precisaoMedia * sensibilidadeMedia) / (precisaoMedia + sensibilidadeMedia)));
+        double fScore = 2 * ((precisaoMedia * sensibilidadeMedia) / (precisaoMedia + sensibilidadeMedia));
+        System.out.println(fScore);
+
+        OperadorArquivo.getInstance().escreverSaidas(vetorSaidaReal, vetorSaidaPrevista, acuracia, precisaoMedia, sensibilidadeMedia, fScore);
     }
 
     @SuppressWarnings("Duplicates")
