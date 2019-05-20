@@ -5,18 +5,19 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class LeitorDataset {
+public class OperadorArquivo {
 
-    private static LeitorDataset instance;
+    private static OperadorArquivo instance;
 
-    public static LeitorDataset getInstance() {
-        if(instance == null)
-            instance = new LeitorDataset();
+    public static OperadorArquivo getInstance() {
+        if (instance == null)
+            instance = new OperadorArquivo();
 
         return instance;
     }
 
-    private LeitorDataset() {}
+    private OperadorArquivo() {
+    }
 
     public void lerDataset(double[][] entradas, double[][] saidas, String nomeArquivo) {
         try {
@@ -37,7 +38,7 @@ public class LeitorDataset {
     private void adicionarDadosLinha(double[][] entradas, double[][] saidas, String[] linha, int countLinha) {
 
         for (int i = 0; i < 256; i++) {
-            entradas[countLinha][i] = Integer.parseInt(linha[i].replace(".","-").split("-")[0]);
+            entradas[countLinha][i] = Integer.parseInt(linha[i].replace(".", "-").split("-")[0]);
         }
 
         for (int i = 0; i < 10; i++) {
@@ -45,10 +46,10 @@ public class LeitorDataset {
         }
     }
 
-    public void escreverSaida(String epocasError, String entradasSaidas, int numeroModelo){
+    public void escreverSaida(String epocasError, String entradasSaidas, int numeroModelo) {
         try {
             FileWriter writer = new FileWriter("output.txt", true);
-            writer.write("Modelo: "+ numeroModelo);
+            writer.write("Modelo: " + numeroModelo);
             writer.write("\n\n");
             writer.write("\n\n");
             writer.write(epocasError);
@@ -61,15 +62,22 @@ public class LeitorDataset {
         }
     }
 
-    public void escreverSaidas(int[] vetorSaidaReal, int[] vetorSaidaPrevista) {
+    public void escreverSaidas(int[] vetorSaidaReal, int[] vetorSaidaPrevista, double acuracia, double precisaoMedia, double sensibilidade, double fScore) {
+        String valoresTabela = "";
+        valoresTabela = "\nAcuracia: " + acuracia
+                + "\nPrecisao: " + precisaoMedia
+                + "\nRecall: " + sensibilidade
+                + "\nF1-Score: " + fScore;
         try {
             FileWriter writer = new FileWriter("output.txt", true);
+            writer.write(valoresTabela);
+            writer.write("\n");
             writer.write("Saida real, total:" + vetorSaidaReal.length + "\n");
-            for(double v : vetorSaidaReal)
+            for (double v : vetorSaidaReal)
                 writer.write(v + "\n");
             writer.write("\n");
             writer.write("Saida prevista, total:" + vetorSaidaReal.length + "\n");
-            for(double v : vetorSaidaReal)
+            for (double v : vetorSaidaReal)
                 writer.write(v + "\n");
             writer.write("\n");
             writer.write("\n");
