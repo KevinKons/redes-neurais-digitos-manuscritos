@@ -72,17 +72,7 @@ public class OperadorArquivo {
             FileWriter writer = new FileWriter("output.txt", true);
             writer.write(valoresTabela);
             writer.write("\n");
-            writer.write("Saida real, total:" + vetorSaidaReal.length + "\n");
-            for (double v : vetorSaidaReal)
-                writer.write(v + "\n");
-            writer.write("\n");
-            writer.write("Saida prevista, total:" + vetorSaidaReal.length + "\n");
-            for (double v : vetorSaidaReal)
-                writer.write(v + "\n");
-            writer.write("\n");
-            writer.write("\n");
             writer.write("--------------------------------------------------------------------------------------");
-            writer.write("\n");
             writer.write("\n");
             writer.close();
         } catch (IOException e) {

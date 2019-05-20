@@ -81,20 +81,12 @@ public class TelaPrincipal extends JFrame {
         iniciaMatriz();
         setaTamanhoColunas();
 
-        jbTreinarRede.addActionListener( e -> {
+        jbTreinarRede.addActionListener(e -> {
             controllerRN.montarEstruturaCrossValidation(5);
         });
 
         jbIdentificarNumero.addActionListener(e -> {
-            JOptionPane.showMessageDialog(null, "Numero identificado: 5");
-//            String representacao = "";
-//            boolean[][] matriz = controller.getMatriz();
-//            for(boolean[] linha : matriz) {
-//                for (boolean celula : linha)
-//                    representacao = representacao + celula + " ";
-//                representacao += "\n";
-//            }
-//            JOptionPane.showMessageDialog(null, representacao);
+            JOptionPane.showMessageDialog(null, "Numero identificado: " + controllerRN.calcSaida(controller.getMatriz()));
         });
 
         jbLimpar.addActionListener(e -> {
@@ -112,10 +104,10 @@ public class TelaPrincipal extends JFrame {
 
                 boolean valorAtual = controller.matrizClicada(y, x);
                 JLabel label = (JLabel) tableModel.getValueAt(y, x);
-                if(valorAtual)
-                    label.setBackground(new Color(0,0,0));
+                if (valorAtual)
+                    label.setBackground(new Color(0, 0, 0));
                 else
-                    label.setBackground(new Color(217,217,243));
+                    label.setBackground(new Color(217, 217, 243));
 
                 jtbMatriz.repaint();
             }
@@ -139,21 +131,21 @@ public class TelaPrincipal extends JFrame {
     }
 
     private void setaTamanhoColunas() {
-        for(int i = 0; i < jtbMatriz.getColumnModel().getColumnCount(); i++) {
+        for (int i = 0; i < jtbMatriz.getColumnModel().getColumnCount(); i++) {
             jtbMatriz.getColumnModel().getColumn(i).setPreferredWidth(20);
         }
     }
 
     private void iniciaMatriz() {
         boolean[][] matriz = controller.getMatriz();
-        for(int i = 0; i < matriz.length; i++) {
-            for(int j = 0; j < matriz[i].length; j++) {
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[i].length; j++) {
                 JLabel l = new JLabel();
                 l.setOpaque(true);
-                if(matriz[i][j])
-                    l.setBackground(new Color(0,0,0));
+                if (matriz[i][j])
+                    l.setBackground(new Color(0, 0, 0));
                 else
-                    l.setBackground(new Color(217,217,243));
+                    l.setBackground(new Color(217, 217, 243));
 
                 jtbMatriz.add(l);
                 tableModel.setValueAt(l, i, j);

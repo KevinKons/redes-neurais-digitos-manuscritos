@@ -1,5 +1,6 @@
 package rns;
 
+import model.Resultado;
 import org.encog.Encog;
 import org.encog.engine.network.activation.ActivationSigmoid;
 import org.encog.ml.data.MLData;
@@ -23,7 +24,6 @@ public class RedeNeural {
                                int numeroModelo) {
 
         BasicNetwork network = new BasicNetwork();
-
         network.addLayer(new BasicLayer(null, true, qntPixels));
         network.addLayer(new BasicLayer(new ActivationSigmoid(), true, 60));
         network.addLayer(new BasicLayer(new ActivationSigmoid(), true, 50));
@@ -42,7 +42,7 @@ public class RedeNeural {
 
         do {
             treinamento.iteration();
-            System.out.println("Época #" + contadorEpocas + " Erro:" + treinamento.getError());
+//            System.out.println("Época #" + contadorEpocas + " Erro:" + treinamento.getError());
             contadorEpocas++;
             epocaError = "Época #" + contadorEpocas + " Erro:" + treinamento.getError();
         } while (treinamento.getError() > 0.01);
@@ -56,9 +56,10 @@ public class RedeNeural {
         for (int i = 0; i < entradasParaTeste.length; i++) {
             MLData caso1Entrada = new BasicMLData(entradasParaTeste[i]);
             MLData saidaCaso1 = network.compute(caso1Entrada);
-            System.out.println("Entrada caso" + i + ": " + caso1Entrada + " --> Saída: " + saidaCaso1);
+//            System.out.println("Entrada caso" + i + ": " + caso1Entrada + " --> Saída: " + saidaCaso1);
             entradaSaida = "Entrada caso" + i + ": " + caso1Entrada + " --> Saída: " + saidaCaso1 + "\n";
         }
+        Resultado.getInstance().setNetwork(network);
         Encog.getInstance().shutdown();
         OperadorArquivo.getInstance().escreverSaida(epocaError, entradaSaida, numeroModelo);
         return saidaDaRede;
