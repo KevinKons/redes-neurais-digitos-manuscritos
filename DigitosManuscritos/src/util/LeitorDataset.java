@@ -55,12 +55,30 @@ public class LeitorDataset {
             writer.write("\n\n");
             writer.write(entradasSaidas);
             writer.write("\n\n");
-            writer.write("--------------------------------------------------------------------------------------------------------------------------------------------------");
-            writer.write("\n\n");
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    public void escreverSaidas(int[] vetorSaidaReal, int[] vetorSaidaPrevista) {
+        try {
+            FileWriter writer = new FileWriter("output.txt", true);
+            writer.write("Saida real, total:" + vetorSaidaReal.length + "\n");
+            for(double v : vetorSaidaReal)
+                writer.write(v + "\n");
+            writer.write("\n");
+            writer.write("Saida prevista, total:" + vetorSaidaReal.length + "\n");
+            for(double v : vetorSaidaReal)
+                writer.write(v + "\n");
+            writer.write("\n");
+            writer.write("\n");
+            writer.write("--------------------------------------------------------------------------------------");
+            writer.write("\n");
+            writer.write("\n");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
