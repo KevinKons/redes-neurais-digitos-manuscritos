@@ -63,7 +63,7 @@ public class ControllerRedeNeural {
         double[] precisao = calculaPresicao(matrizConfusao);
         double[] sensibilidade = calculaSensibilidade(matrizConfusao);
         double precisaoMedia = calculaPrecisaoMedia(precisao);
-        double sensibilidadeMedia = calculaSensibilidadeMedia(precisao);
+        double sensibilidadeMedia = calculaSensibilidadeMedia(sensibilidade);
 
 //        System.out.println("Acuracia " + acuracia);
 //        System.out.println("Precisao Media: " + precisaoMedia);
