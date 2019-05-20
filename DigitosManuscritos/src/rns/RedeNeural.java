@@ -55,7 +55,7 @@ public class RedeNeural {
             MLData caso1Entrada = new BasicMLData(entradasParaTeste[i]);
             MLData saidaCaso1 = network.compute(caso1Entrada);
             System.out.println("Entrada caso" + i + ": " + caso1Entrada + " --> Saída: " + saidaCaso1);
-            entradaSaida += "Entrada caso" + i + ": " + caso1Entrada + " --> Saída: " + saidaCaso1 + "\n";
+            entradaSaida = "Entrada caso" + i + ": " + caso1Entrada + " --> Saída: " + saidaCaso1 + "\n";
         }
         Encog.getInstance().shutdown();
         LeitorDataset.getInstance().escreverSaida(epocaError, entradaSaida, numeroModelo);

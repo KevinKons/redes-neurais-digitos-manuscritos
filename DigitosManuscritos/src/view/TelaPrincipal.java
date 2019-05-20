@@ -1,5 +1,6 @@
 package view;
 
+import controller.ControllerRedeNeural;
 import controller.MatrizController;
 
 import javax.swing.*;
@@ -17,9 +18,11 @@ public class TelaPrincipal extends JFrame {
     }
 
     private MatrizController controller = new MatrizController();
+    private ControllerRedeNeural controllerRN = new ControllerRedeNeural();
     private Container container;
     private JPanel jpMatriz;
     private JPanel jpMenu;
+    private JButton jbTreinarRede;
     private JButton jbLimpar;
     private JButton jbIdentificarNumero;
     private JTable jtbMatriz;
@@ -43,9 +46,12 @@ public class TelaPrincipal extends JFrame {
         jpMenu = new JPanel();
         jpMenu.setBorder(new TitledBorder("Menu"));
         jpMenu.setLayout(new FlowLayout());
+
+        jbTreinarRede = new JButton("Treinar Rede");
         jbLimpar = new JButton("Limpar Matriz");
         jbIdentificarNumero = new JButton("Identificar número");
 
+        jpMenu.add(jbTreinarRede);
         jpMenu.add(jbLimpar);
         jpMenu.add(jbIdentificarNumero);
 
@@ -75,15 +81,20 @@ public class TelaPrincipal extends JFrame {
         iniciaMatriz();
         setaTamanhoColunas();
 
+        jbTreinarRede.addActionListener( e -> {
+            controllerRN.montarEstruturaCrossValidation(5);
+        });
+
         jbIdentificarNumero.addActionListener(e -> {
-            String representacao = "";
-            boolean[][] matriz = controller.getMatriz();
-            for(boolean[] linha : matriz) {
-                for (boolean celula : linha)
-                    representacao = representacao + celula + " ";
-                representacao += "\n";
-            }
-            JOptionPane.showMessageDialog(null, representacao);
+            JOptionPane.showMessageDialog(null, "Numero identificado: 5");
+//            String representacao = "";
+//            boolean[][] matriz = controller.getMatriz();
+//            for(boolean[] linha : matriz) {
+//                for (boolean celula : linha)
+//                    representacao = representacao + celula + " ";
+//                representacao += "\n";
+//            }
+//            JOptionPane.showMessageDialog(null, representacao);
         });
 
         jbLimpar.addActionListener(e -> {

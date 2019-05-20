@@ -33,4 +33,15 @@ public class MatrizController {
         matriz.getCelulas()[y][x] = !matriz.getCelulas()[y][x];
         return matriz.getCelulas()[y][x];
     }
+
+    public void treinarRede(){
+
+    }
+
+    public double[][] converterBooleanToDouble(boolean[][] matriz){
+        double[][] matrizConvertida = new double[matriz.length][matriz[0].length];
+
+//        for(int i = 0; i < matriz.length)
+    }
+
 }
