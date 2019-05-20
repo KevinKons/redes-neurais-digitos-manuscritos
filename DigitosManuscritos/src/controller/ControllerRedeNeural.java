@@ -65,22 +65,22 @@ public class ControllerRedeNeural {
         double precisaoMedia = calculaPrecisaoMedia(precisao);
         double sensibilidadeMedia = calculaSensibilidadeMedia(sensibilidade);
 
-//        System.out.println("Acuracia " + acuracia);
-//        System.out.println("Precisao Media: " + precisaoMedia);
-//        System.out.println("Precisao");
-//        for (int i = 0; i < RedeNeural.qntClasses; i++) {
-//            System.out.print(precisao[i] + "\t");
-//        }
+        System.out.println("Acuracia " + acuracia);
+        System.out.println("Precisao Media: " + precisaoMedia);
+        System.out.println("Precisao");
+        for (int i = 0; i < RedeNeural.qntClasses; i++) {
+            System.out.print(precisao[i] + "\t");
+        }
 
-//        System.out.println("\n" + "Sensiblidade Media: " + sensibilidadeMedia);
-//        System.out.println("\n" + "Sensibilidades:");
-//        for (int i = 0; i < RedeNeural.qntClasses; i++) {
-//            System.out.print(sensibilidade[i] + "\t");
-//        }
+        System.out.println("\n" + "Sensiblidade Media: " + sensibilidadeMedia);
+        System.out.println("\n" + "Sensibilidades:");
+        for (int i = 0; i < RedeNeural.qntClasses; i++) {
+            System.out.print(sensibilidade[i] + "\t");
+        }
 
-//        System.out.println("\n" + "F1-Score");
+        System.out.println("\n" + "F1-Score");
         double fScore = 2 * ((precisaoMedia * sensibilidadeMedia) / (precisaoMedia + sensibilidadeMedia));
-//        System.out.println(fScore);
+        System.out.println(fScore);
 
         Resultado.getInstance().setAcuracia(acuracia);
         Resultado.getInstance().setPrecisaoMedia(precisaoMedia);
