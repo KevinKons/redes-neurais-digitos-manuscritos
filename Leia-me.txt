@@ -1,0 +1,19 @@
+Para executar o projeto, siga os seguintes passos:
+
+1 - Certifique-se de que o .jar do projeto e o dataset (semeion.data) estão na mesma pasta;
+
+2 - Abra o terminal do seu computador e navegue até a pasta do .jar do projeto;
+
+3 - Execute o seguinte comando no terminal: java -jar DigitosManuscritos.java
+
+4 - Ao abrir o software, clique no botão Treinar Rede e aguarde o treinamento da rede.
+	Obs.: O botão terá um aspecto de pressionado quando a rede estiver sendo treinada, e ao finalizar, o botão Treinar Rede voltará ao normal. Isso é devido a construção do sistema ter sido realizada em thread única.
+
+5 - Ao finalizar o treinamento, desenhe na tabela um número qualquer e clique no botão Identificar número. Uma nova janela surgirá informando o número digitado.
+
+-------------------------------------------------------------------------
+
+Desenvolvedores:
+
+Kevin Kons
+Douglas Martins
