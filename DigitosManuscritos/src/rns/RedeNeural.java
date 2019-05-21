@@ -60,9 +60,9 @@ public class RedeNeural {
             entradaSaida = "Entrada caso" + i + ": " + caso1Entrada + " --> Saída: " + saidaCaso1 + "\n";
             saidaDaRede[i] = saidaCaso1.getData();
         }
-//        Resultado.getInstance().setNetwork(network);
+        Resultado.getInstance().setNetwork(network);
         Encog.getInstance().shutdown();
-//        OperadorArquivo.getInstance().escreverSaida(epocaError, entradaSaida, numeroModelo);
+        OperadorArquivo.getInstance().escreverSaida(epocaError, entradaSaida, numeroModelo);
         return saidaDaRede;
     }
 
