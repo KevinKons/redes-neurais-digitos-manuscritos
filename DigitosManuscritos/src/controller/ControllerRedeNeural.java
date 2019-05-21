@@ -4,58 +4,216 @@ import model.Resultado;
 import org.encog.ml.data.MLData;
 import org.encog.ml.data.basic.BasicMLData;
 import rns.RedeNeural;
-import util.OperadorArquivo;
 import util.OperacaoComMatriz;
+import util.OperadorArquivo;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ControllerRedeNeural {
 
     private int tamanhoFold;
 
+    private List<double[]> entradas0 = new ArrayList<>();
+    private List<double[]> saidas0 = new ArrayList<>();
+    private List<double[]> entradas1 = new ArrayList<>();
+    private List<double[]> saidas1 = new ArrayList<>();
+    private List<double[]> entradas2 = new ArrayList<>();
+    private List<double[]> saidas2 = new ArrayList<>();
+    private List<double[]> entradas3 = new ArrayList<>();
+    private List<double[]> saidas3 = new ArrayList<>();
+    private List<double[]> entradas4 = new ArrayList<>();
+    private List<double[]> saidas4 = new ArrayList<>();
+    private List<double[]> entradas5 = new ArrayList<>();
+    private List<double[]> saidas5 = new ArrayList<>();
+    private List<double[]> entradas6 = new ArrayList<>();
+    private List<double[]> saidas6 = new ArrayList<>();
+    private List<double[]> entradas7 = new ArrayList<>();
+    private List<double[]> saidas7 = new ArrayList<>();
+    private List<double[]> entradas8 = new ArrayList<>();
+    private List<double[]> saidas8 = new ArrayList<>();
+    private List<double[]> entradas9 = new ArrayList<>();
+    private List<double[]> saidas9 = new ArrayList<>();
+
+    private int qnt0 = 0;
+    private int qnt1 = 0;
+    private int qnt2 = 0;
+    private int qnt3 = 0;
+    private int qnt4 = 0;
+    private int qnt5 = 0;
+    private int qnt6 = 0;
+    private int qnt7 = 0;
+    private int qnt8 = 0;
+    private int qnt9 = 0;
+
     @SuppressWarnings("Duplicates")
-    public void montarEstruturaCrossValidation(int folds) {
+    public void montarEstruturaCrossValidation(int qntFolds) {
         double[][] entradas = new double[RedeNeural.qntExemplos][RedeNeural.qntPixels];
         double[][] saidas = new double[RedeNeural.qntExemplos][10];
 
         OperadorArquivo operadorArquivo = OperadorArquivo.getInstance();
         operadorArquivo.lerDataset(entradas, saidas, "semeion.data");
 
-        tamanhoFold = RedeNeural.qntExemplos / folds;
-        for (int i = 0; i < folds; i++)
-            treinarApartirDeModelo(i, entradas, saidas);
-    }
+        for(int i = 0; i < RedeNeural.qntExemplos; i++) {
+            int saidaEntrada = retornaSaida(saidas[i]);
+            switch (saidaEntrada) {
+                case 0:
+                    entradas0.add(entradas[i]);
+                    saidas0.add(saidas[i]);
+                    qnt0++;
+                    break;
+                case 1:
+                    entradas1.add(entradas[i]);
+                    saidas1.add(saidas[i]);
+                    qnt1++;
+                    break;
+                case 2:
+                    entradas2.add(entradas[i]);
+                    saidas2.add(saidas[i]);
+                    qnt2++;
+                    break;
+                case 3:
+                    entradas3.add(entradas[i]);
+                    saidas3.add(saidas[i]);
+                    qnt3++;
+                    break;
+                case 4:
+                    entradas4.add(entradas[i]);
+                    saidas4.add(saidas[i]);
+                    qnt4++;
+                    break;
+                case 5:
+                    entradas5.add(entradas[i]);
+                    saidas5.add(saidas[i]);
+                    qnt5++;
+                    break;
+                case 6:
+                    entradas6.add(entradas[i]);
+                    saidas6.add(saidas[i]);
+                    qnt6++;
+                    break;
+                case 7:
+                    entradas7.add(entradas[i]);
+                    saidas7.add(saidas[i]);
+                    qnt7++;
+                    break;
+                case 8:
+                    entradas8.add(entradas[i]);
+                    saidas8.add(saidas[i]);
+                    qnt8++;
+                    break;
+                case 9:
+                    entradas9.add(entradas[i]);
+                    saidas9.add(saidas[i]);
+                    qnt9++;
+                    break;
+            }
+        }
 
-    private void treinarApartirDeModelo(int numeroModelo,
-                                        double[][] todasEntradas, double[][] todasSaidas) {
-        double[][] entradasParaTeste = new double[tamanhoFold][RedeNeural.qntPixels];
-        double[][] saidasParaTeste = new double[tamanhoFold][10];
+        tamanhoFold = (qnt0 / qntFolds) + (qnt1 / qntFolds) +
+                (qnt2 / qntFolds) + (qnt3 / qntFolds) +
+                (qnt4 / qntFolds) + (qnt5 / qntFolds) +
+                (qnt6 / qntFolds) + (qnt7 / qntFolds) +
+                (qnt8 / qntFolds) + (qnt9 / qntFolds);
+        List<double[][]> subModelosEntradas = new ArrayList<>();
+        List<double[][]> subModelosSaidas = new ArrayList<>();
+        for (int i = 0; i < qntFolds; i++) {
+            double[][] entradasSubModelo = new double[tamanhoFold][RedeNeural.qntPixels];
+            double[][] saidasSubModelo = new double[tamanhoFold][10];
+            int primeiraPosVazia = 0;
 
-        double[][] entradasParaConstrucao = new double[RedeNeural.qntExemplos - tamanhoFold][RedeNeural.qntPixels];
-        double[][] saidasParaConstrucao = new double[RedeNeural.qntExemplos - tamanhoFold][10];
-
-        int menorPosicaoVaziaTeste = 0;
-        int menorPosicaoVaziaConstrucao = 0;
-
-        int primeiraPosParaTeste = tamanhoFold * numeroModelo;
-        for (int i = 0; i < todasEntradas.length; i++)
-            if (i >= primeiraPosParaTeste && i < primeiraPosParaTeste + tamanhoFold) {
-                entradasParaTeste[menorPosicaoVaziaTeste] = todasEntradas[i];
-                saidasParaTeste[menorPosicaoVaziaTeste] = todasSaidas[i];
-                menorPosicaoVaziaTeste++;
-            } else {
-                entradasParaConstrucao[menorPosicaoVaziaConstrucao] = todasEntradas[i];
-                saidasParaConstrucao[menorPosicaoVaziaConstrucao] = todasSaidas[i];
-                menorPosicaoVaziaConstrucao++;
+            for(int k = 0; k < (qnt0 / qntFolds); k++) {
+                entradasSubModelo[primeiraPosVazia] = entradas0.remove(0);
+                saidasSubModelo[primeiraPosVazia] = saidas0.remove(0);
+                primeiraPosVazia++;
+            }
+            for(int k = 0; k < (qnt1 / qntFolds); k++) {
+                entradasSubModelo[primeiraPosVazia] = entradas1.remove(0);
+                saidasSubModelo[primeiraPosVazia] = saidas1.remove(0);
+                primeiraPosVazia++;
+            }
+            for(int k = 0; k < (qnt2 / qntFolds); k++) {
+                entradasSubModelo[primeiraPosVazia] = entradas2.remove(0);
+                saidasSubModelo[primeiraPosVazia] = saidas2.remove(0);
+                primeiraPosVazia++;
+            }
+            for(int k = 0; k < (qnt3 / qntFolds); k++) {
+                entradasSubModelo[primeiraPosVazia] = entradas3.remove(0);
+                saidasSubModelo[primeiraPosVazia] = saidas3.remove(0);
+                primeiraPosVazia++;
+            }
+            for(int k = 0; k < (qnt4 / qntFolds); k++) {
+                entradasSubModelo[primeiraPosVazia] = entradas4.remove(0);
+                saidasSubModelo[primeiraPosVazia] = saidas4.remove(0);
+                primeiraPosVazia++;
+            }
+            for(int k = 0; k < (qnt5 / qntFolds); k++) {
+                entradasSubModelo[primeiraPosVazia] = entradas5.remove(0);
+                saidasSubModelo[primeiraPosVazia] = saidas5.remove(0);
+                primeiraPosVazia++;
+            }
+            for(int k = 0; k < (qnt6 / qntFolds); k++) {
+                entradasSubModelo[primeiraPosVazia] = entradas6.remove(0);
+                saidasSubModelo[primeiraPosVazia] = saidas6.remove(0);
+                primeiraPosVazia++;
+            }
+            for(int k = 0; k < (qnt7 / qntFolds); k++) {
+                entradasSubModelo[primeiraPosVazia] = entradas7.remove(0);
+                saidasSubModelo[primeiraPosVazia] = saidas7.remove(0);
+                primeiraPosVazia++;
+            }
+            for(int k = 0; k < (qnt8 / qntFolds); k++) {
+                entradasSubModelo[primeiraPosVazia] = entradas8.remove(0);
+                saidasSubModelo[primeiraPosVazia] = saidas8.remove(0);
+                primeiraPosVazia++;
+            }
+            for(int k = 0; k < (qnt9 / qntFolds); k++) {
+                entradasSubModelo[primeiraPosVazia] = entradas9.remove(0);
+                saidasSubModelo[primeiraPosVazia] = saidas9.remove(0);
+                primeiraPosVazia++;
             }
 
+            subModelosEntradas.add(entradasSubModelo);
+            subModelosSaidas.add(saidasSubModelo);
+        }
+
+        double[][] entradasConstrucao;
+        double[][] saidasConstrucao;
+        double[][] entradasTeste;
+        double[][] saidasTeste;
+        for(int i = 0; i < qntFolds; i++) {
+            entradasConstrucao = new double[tamanhoFold * (qntFolds - 1)][RedeNeural.qntPixels];
+            saidasConstrucao = new double[tamanhoFold * (qntFolds - 1)][10];
+            entradasTeste = subModelosEntradas.get(i);
+            saidasTeste = subModelosSaidas.get(i);
+
+            int primeiraPosVazia = 0;
+
+
+            for(int j = 0; j < qntFolds; j++) {
+                if(j != i) {
+                    for(int k = 0; k < tamanhoFold; k++) {
+                        entradasConstrucao[primeiraPosVazia] = subModelosEntradas.get(j)[k];
+                        saidasConstrucao[primeiraPosVazia] = subModelosSaidas.get(j)[k];
+                        primeiraPosVazia++;
+                    }
+                }
+            }
+            treinarApartirDeModelo(entradasConstrucao, saidasConstrucao, entradasTeste, saidasTeste, i);
+        }
+    }
+
+    private void treinarApartirDeModelo(double[][] entradasConstrucao, double[][] saidasConstrucao,
+                                        double[][] entradasTeste, double[][] saidasTeste, int numeroModelo) {
         RedeNeural rn = new RedeNeural();
-        double[][] matrizSaida = rn.aprender(entradasParaConstrucao, saidasParaConstrucao, entradasParaTeste,
-                saidasParaTeste, numeroModelo);
+        double[][] matrizSaida = rn.aprender(entradasConstrucao, saidasConstrucao, entradasTeste,
+                saidasTeste, numeroModelo);
 
         int[] vetorSaidaPrevista = new int[matrizSaida.length];
         int[] vetorSaidaReal = new int[matrizSaida.length];
         for (int i = 0; i < matrizSaida.length; i++) {
             vetorSaidaPrevista[i] = retornaSaida(matrizSaida[i]);
-            vetorSaidaReal[i] = retornaSaida(saidasParaTeste[i]);
+            vetorSaidaReal[i] = retornaSaida(saidasTeste[i]);
         }
 
         int[][] matrizConfusao = geraMatrizConfusao(vetorSaidaReal, vetorSaidaPrevista);
