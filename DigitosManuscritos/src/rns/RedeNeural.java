@@ -27,8 +27,6 @@ public class RedeNeural {
         network.addLayer(new BasicLayer(null, true, qntPixels));
         network.addLayer(new BasicLayer(new ActivationSigmoid(), true, 60));
         network.addLayer(new BasicLayer(new ActivationSigmoid(), true, 50));
-        network.addLayer(new BasicLayer(new ActivationSigmoid(), true, 50));
-        network.addLayer(new BasicLayer(new ActivationSigmoid(), true, 80));
         network.addLayer(new BasicLayer(new ActivationSigmoid(), false, qntClasses));
 
         network.getStructure().finalizeStructure();

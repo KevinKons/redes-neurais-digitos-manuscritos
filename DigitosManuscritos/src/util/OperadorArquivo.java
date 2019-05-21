@@ -21,8 +21,8 @@ public class OperadorArquivo {
 
     public void lerDataset(double[][] entradas, double[][] saidas, String nomeArquivo) {
         try {
-//            BufferedReader ler = new BufferedReader(new FileReader("./" + nomeArquivo));
-            BufferedReader ler = new BufferedReader(new FileReader("../dataset-digitos-manuscritos/" + nomeArquivo));
+            BufferedReader ler = new BufferedReader(new FileReader("./" + nomeArquivo));
+//            BufferedReader ler = new BufferedReader(new FileReader("../dataset-digitos-manuscritos/" + nomeArquivo));
             String str;
             int countLinha = 0;
 
